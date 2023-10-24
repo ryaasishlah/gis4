@@ -1,5 +1,6 @@
 import Feature from 'https://cdn.skypack.dev/ol/Feature.js';
 import Point from 'https://cdn.skypack.dev/ol/geom/Point.js';
+import Polygon from 'https://cdn.skypack.dev/ol/geom/Polygon.js'
 import VectorSource from 'https://cdn.skypack.dev/ol/source/Vector.js';
 import {Vector as VectorLayer} from 'https://cdn.skypack.dev/ol/layer.js';
 import {fromLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
