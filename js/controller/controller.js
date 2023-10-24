@@ -11,7 +11,7 @@ import {
     map
 } from '../config/peta.js';
 import Draw from 'https://cdn.skypack.dev/ol/interaction/Draw.js';
-import { Addlayer } from "../../../ch1/verjscroot/getfunction.js";
+
 
 export function isiRowPoint(value) {
     if (value.geometry.type === "Point") {
@@ -114,59 +114,41 @@ export function drawer(geojson) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-export function AddLayerToMAP(geojson) {
+export function AddLayerToMAP(geojson){ 
     const Sourcedata = new ol.source.Vector({
         url: geojson,
         format: new ol.format.GeoJSON(),
-    });
-
-    const geojsonFeatureCollection = {
-        type: "FeatureCollection",
-        features: Sourcedata
-    };
-
-    console.log(geojsonFeatureCollection)
+        // wrapx : false
+      });
 
     //buat layer untuk point, polygon, dan polyline
     const layerpoint = new ol.layer.Vector({
         source: Sourcedata,
         style: new ol.style.Style({
             image: new ol.style.Icon({
-                src: 'img/icog.png',
-                scale: 0.5,
+                src: 'img/icog.png', 
+                scale: 0.5, 
                 opacity: 1
             })
         })
     });
-
+    
     const polylayer = new ol.layer.Vector({
         source: Sourcedata,
         style: function (feature) {
             const featureType = feature.getGeometry().getType();
-
-
             if (featureType === 'Polygon') {
                 return new ol.style.Style({
                     stroke: new ol.style.Stroke({
-                        color: 'blue',
+                        color: 'blue', 
                         width: 2
                     })
                 });
             } else {
-
+                
                 return new ol.style.Style({
                     stroke: new ol.style.Stroke({
-                        color: 'red',
+                        color: 'red', 
                         width: 3
                     })
                 });
@@ -176,12 +158,17 @@ export function AddLayerToMAP(geojson) {
 
     map.addLayer(polylayer);
     map.addLayer(layerpoint);
+    // drawer(Sourcedata)
+    
 }
 
-export function responseData(results) {
+
+export function responseData(results){
     // console.log(results.features);
     // console.log(MakeGeojsonFromAPI(results))
+    // Addlayer()
     results.forEach(isiRowPoint);
     results.forEach(isiRowPolygon);
     results.forEach(isiRowPolyline);
 }
+

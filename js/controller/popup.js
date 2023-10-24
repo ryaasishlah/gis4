@@ -1,7 +1,7 @@
 import {toLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
 import {toStringHDMS} from 'https://cdn.skypack.dev/ol/coordinate.js';
 import {overlay,map,popupinfo,idmarker} from '../config/peta.js';
-import {URLGeoJson, clickpopup, urlPostGCF} from '../template/template.js'; 
+import {URLGeoJson, clickpopup, urlPostGCF} from '../template/template.js';
 import {insertMarker,deleteMarker} from './marker.js';
 import {setInner,textBlur,onClick, getValue,setValue} from 'https://jscroot.github.io/element/croot.js';
 import { postWithToken } from "https://jscroot.github.io/api/croot.js";
@@ -19,25 +19,25 @@ export function onDeleteMarkerClick() {
 }
 
 export function onSubmitMarkerClick() {
-  let long = getValue('long');
-  let lat = getValue('lat');
-  let name = getValue('name');
-  let volume = getValue('volume');
-  let type = getValue('type');
-    let data = {
-      "type" : type,
-      "name" : name,
-      "volume" : volume,
-      "coordinates" : [
-        parseFloat(long),parseFloat(lat)
-      ]
-    };
-    postWithToken(urlPostGCF,"Token","dsf9ygf87h98u479y98dj0fs89nfd7",data,afterSubmitCOG);
-  overlay.setPosition(undefined);
-  textBlur('popup-closer');
-    insertMarker(name,long,lat,volume);
-    idmarker.id=idmarker.id+1;
-  console.log(name)
+    let long = getValue('long');
+    let lat = getValue('lat');
+    let name = getValue('name');
+    let volume = getValue('volume');
+    let type = getValue('type');
+      let data = {
+        "type" : type,
+        "name" : name,
+        "volume" : volume,
+        "coordinates" : [
+          parseFloat(long),parseFloat(lat)
+        ]
+      };
+      postWithToken(urlPostGCF,"Token","dsf9ygf87h98u479y98dj0fs89nfd7",data,afterSubmitCOG);
+    overlay.setPosition(undefined);
+    textBlur('popup-closer');
+      insertMarker(name,long,lat,volume);
+      idmarker.id=idmarker.id+1;
+    console.log(name)
 
 }
 
@@ -56,11 +56,11 @@ function popupInputMarker(evt) {
     overlay.setPosition(tile);
 }
 
-function popupGetMarker(evt,feature) {
-    let title = feature.get('id')+"#"+feature.get('name');
+function popupGetMarker(evt,features) {
+    let title = features.get('name');
     setInner('popupinfo-title',title);
-    setValue('idmarker',feature.get('id'));
-    let ctnt = "volume : "+feature.get('volume')+"<br>XY : "+feature.get('geometry').flatCoordinates;
+    setValue('idmarker',features.get('id'));
+    let ctnt = "type : "+features.getGeometry().getType()+"<br>XY : "+toLonLat(evt.coordinate);
     setInner('popupinfo-content',ctnt);
     popupinfo.setPosition(evt.coordinate);
 }
