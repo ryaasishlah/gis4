@@ -53,10 +53,7 @@ export function MakeGeojsonFromAPI(value) {
 
     const link = document.createElement("a");
     link.href = url;
-    // link.download = fileName || "data.geojson"; 
-
-    // document.body.appendChild(link);
-
+    
     return link;
 }
 
