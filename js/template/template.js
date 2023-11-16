@@ -1,5 +1,5 @@
 export let URLGeoJson = "https://us-central1-noted-slice-401902.cloudfunctions.net/data-json";
-export let urlPostGCF = "https://us-central1-noted-slice-401902.cloudfunctions.net/postgeo";
+export let urlPostGCF = "https://us-central1-noted-slice-401902.cloudfunctions.net/gis4";
 export let tableTag = "tr";
 export let tableRowClass = "content is-small";
 export let tableTemplate = `
